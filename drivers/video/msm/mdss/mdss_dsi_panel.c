@@ -605,6 +605,9 @@ static void mdss_dsi_panel_bl_ctrl(struct mdss_panel_data *pdata,
 	}
 }
 
+#ifdef CONFIG_YULONG_COLOR
+extern void color_enhancement_impl_apply(void);
+#endif
 static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 {
 	struct mdss_dsi_ctrl_pdata *ctrl = NULL;
@@ -630,7 +633,11 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 		mdss_dsi_panel_cmds_send(ctrl, &ctrl->on_cmds);
 
 #ifdef CONFIG_YULONG_COLOR
+<<<<<<< HEAD
 	color_enhancement_impl_apply();
+=======
+ color_enhancement_impl_apply();
+>>>>>>> 06d438b... Added support for Colour Enhancement
 #endif
 
 	mdss_livedisplay_update(ctrl, MODE_UPDATE_ALL);
@@ -1860,6 +1867,7 @@ error:
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 #ifdef LCM_SUPPORT_READ_VERSION
 static int mdss_panel_parse_panel_name(struct device_node *node)
 {
@@ -1906,6 +1914,11 @@ static int msm_lcd_name_create_sysfs(void)
 }
 #endif
 
+=======
+#ifdef CONFIG_YULONG_COLOR
+extern void color_enhancement_impl_init(struct mdss_dsi_ctrl_pdata *);
+#endif
+>>>>>>> 06d438b... Added support for Colour Enhancement
 int mdss_dsi_panel_init(struct device_node *node,
 	struct mdss_dsi_ctrl_pdata *ctrl_pdata,
 	bool cmd_cfg_cont_splash)
@@ -1961,8 +1974,15 @@ int mdss_dsi_panel_init(struct device_node *node,
 	ctrl_pdata->panel_data.set_backlight = mdss_dsi_panel_bl_ctrl;
 	ctrl_pdata->switch_mode = mdss_dsi_panel_switch_mode;
 
+<<<<<<< HEAD
 #ifdef LCM_SUPPORT_READ_VERSION
 	msm_lcd_name_create_sysfs();
 #endif
+=======
+#ifdef CONFIG_YULONG_COLOR
+ color_enhancement_impl_init(ctrl_pdata);
+#endif
+
+>>>>>>> 06d438b... Added support for Colour Enhancement
 	return 0;
 }
