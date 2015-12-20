@@ -18,6 +18,13 @@ obj-$(CONFIG_CPU_FREQ_GOV_INTELLIDEMAND)+= cpufreq_intellidemand.o
 obj-$(CONFIG_CPU_FREQ_GOV_DARKNESS) 	+= cpufreq_darkness.o
 obj-$(CONFIG_CPU_FREQ_GOV_SMARTMAX)	+= cpufreq_smartmax.o
 obj-$(CONFIG_CPU_FREQ_GOV_ZZMOOVE)	+= cpufreq_zzmoove.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_CPU_FREQ_GOV_ALUCARD) 	+= cpufreq_alucard.o
+obj-$(CONFIG_CPU_FREQ_GOV_WHEATLEY)	+= cpufreq_wheatley.o
+obj-$(CONFIG_CPU_FREQ_GOV_HYPER)	+= cpufreq_hyper.o
+obj-$(CONFIG_CPU_FREQ_GOV_YANKACTIVE)	+= cpufreq_yankactive.o 
+>>>>>>> c3d576f... Added support for Hyper and YankActive Governors
 obj-$(CONFIG_CPU_FREQ_GOV_COMMON)	+= cpufreq_governor.o
 >>>>>>> 953470f... Added support for zzMoove Governor
 =======
