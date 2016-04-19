@@ -118,8 +118,6 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	  loading your cpufreq low-level hardware driver, using the
 	  'interactive' governor for latency-sensitive workloads.
 
-<<<<<<< HEAD
-=======
 config CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
  	bool "intellidemand"
  	select CPU_FREQ_GOV_INTELLIDEMAND
@@ -132,9 +130,8 @@ config CPU_FREQ_DEFAULT_GOV_SMARTMAX
  	bool "smartmax"
  	select CPU_FREQ_GOV_SMARTMAX
  	help
- 	  Use the CPUFreq governor 'smartmax' as default
+ 	  Use the CPUFreq governor 'smartmax' as defaul
 
-<<<<<<< HEAD
 config CPU_FREQ_DEFAULT_GOV_ZZMOOVE
  	bool "zzmoove"
  	select CPU_FREQ_GOV_ZZMOOVE
@@ -142,11 +139,6 @@ config CPU_FREQ_DEFAULT_GOV_ZZMOOVE
  	help
  	  Use the CPUFreq governor 'zzmoove' as default.
 
-<<<<<<< HEAD
->>>>>>> 953470f... Added support for zzMoove Governor
-=======
->>>>>>> 902b9ad... Added support for SmartMax_v2 Governor
-=======
 config CPU_FREQ_DEFAULT_GOV_ALUCARD
  	bool "alucard"
  	select CPU_FREQ_GOV_ALUCARD
@@ -166,7 +158,6 @@ config CPU_FREQ_DEFAULT_GOV_YANKACTIVE
  	bool "yankactive"
  	select CPU_FREQ_GOV_YANKACTIVE
 
->>>>>>> c3d576f... Added support for Hyper and YankActive Governors
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -276,8 +267,7 @@ config CPU_BOOST
 
 	  If in doubt, say N.
 
-<<<<<<< HEAD
-=======
+
 config CPU_FREQ_GOV_INTELLIDEMAND
  	tristate "'intellidemand' cpufreq governor"
  	depends on CPU_FREQ
@@ -291,18 +281,14 @@ config CPU_FREQ_GOV_SMARTMAX
  	help
  	  'smartmax' combines ondemand and smartass2
 
-<<<<<<< HEAD
+
 config CPU_FREQ_GOV_ZZMOOVE
  	tristate "'zzmoove' cpufreq governor"
  	depends on CPU_FREQ
  	help
  	  ZZMoove governor is based on the modified conservative 
 
-<<<<<<< HEAD
->>>>>>> 953470f... Added support for zzMoove Governor
-=======
->>>>>>> 902b9ad... Added support for SmartMax_v2 Governor
-=======
+
 config CPU_FREQ_GOV_HYPER
  	tristate "'hyper' cpufreq governor"
  	depends on CPU_FREQ
@@ -314,7 +300,7 @@ config CPU_FREQ_GOV_YANKACTIVE
  	help
    	  'yankactive' - This driver adds a dynamic cpufreq policy governor designed for latency-sensitive workloads. The governor is based on interactive with just different default settings and can be achieved using interactive with a script. This is added for simplification purposes for myself. 
 
->>>>>>> c3d576f... Added support for Hyper and YankActive Governors
+
 config GENERIC_CPUFREQ_CPU0
 	tristate "Generic CPU0 cpufreq driver"
 	depends on HAVE_CLK && REGULATOR && PM_OPP && OF

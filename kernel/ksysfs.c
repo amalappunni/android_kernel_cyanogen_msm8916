@@ -204,8 +204,6 @@ static struct attribute_group kernel_attr_group = {
 	.attrs = kernel_attrs,
 };
 
-<<<<<<< HEAD
-=======
 static unsigned int Lgentle_fair_sleepers = 0;
 static unsigned int Larch_power = 1;
 
