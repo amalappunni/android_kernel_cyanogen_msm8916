@@ -433,6 +433,7 @@ extern struct cpufreq_governor cpufreq_gov_conservative;
 extern struct cpufreq_governor cpufreq_gov_interactive;
 #define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_interactive)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND)
 extern struct cpufreq_governor cpufreq_gov_intellidemand;
@@ -456,6 +457,8 @@ extern struct cpufreq_governor cpufreq_gov_wheatley;
 extern struct cpufreq_governor cpufreq_gov_hyper;
 #define CPUFREQ_DEFAULT_GOVERNOR (&cpufreq_gov_hyper)
 >>>>>>> c3d576f... Added support for Hyper and YankActive Governors
+=======
+>>>>>>> parent of 8a90497... Added support for SmartMax_v2 Governor
 #endif
 
 /*********************************************************************

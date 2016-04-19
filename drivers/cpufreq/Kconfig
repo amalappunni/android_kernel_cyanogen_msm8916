@@ -156,6 +156,10 @@ config CPU_FREQ_DEFAULT_GOV_YANKACTIVE
  	select CPU_FREQ_GOV_YANKACTIVE
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 953470f... Added support for zzMoove Governor
+>>>>>>> parent of 8a90497... Added support for SmartMax_v2 Governor
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -273,6 +277,7 @@ config CPU_FREQ_GOV_ZZMOOVE
  	help
  	  ZZMoove governor is based on the modified conservative 
 
+<<<<<<< HEAD
 config CPU_FREQ_GOV_HYPER
  	tristate "'hyper' cpufreq governor"
  	depends on CPU_FREQ
@@ -295,6 +300,9 @@ config CPU_BOOST
 
 	  If in doubt, say N.
 
+=======
+>>>>>>> 953470f... Added support for zzMoove Governor
+>>>>>>> parent of 8a90497... Added support for SmartMax_v2 Governor
 config GENERIC_CPUFREQ_CPU0
 	tristate "Generic CPU0 cpufreq driver"
 	depends on HAVE_CLK && REGULATOR && PM_OPP && OF
