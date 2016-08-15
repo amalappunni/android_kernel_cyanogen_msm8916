@@ -22,6 +22,10 @@
 #include <linux/qpnp/pwm.h>
 #include <linux/err.h>
 
+#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
+#include <linux/input/alternativewake.h>
+#endif
+
 #include "mdss_dsi.h"
 #include "mdss_livedisplay.h"
 
@@ -639,7 +643,10 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 end:
 	pinfo->blank_state = MDSS_PANEL_BLANK_UNBLANK;
 	pr_debug("%s:-\n", __func__);
-	return 0;
+#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
+	scr_suspended = false;
+#endif
+ 	return 0;
 }
 
 static int mdss_dsi_post_panel_on(struct mdss_panel_data *pdata)
@@ -689,7 +696,7 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 {
 	struct mdss_dsi_ctrl_pdata *ctrl = NULL;
 	struct mdss_panel_info *pinfo;
-
+	
 	if (pdata == NULL) {
 		pr_err("%s: Invalid input data\n", __func__);
 		return -EINVAL;
@@ -712,6 +719,9 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 end:
 	pinfo->blank_state = MDSS_PANEL_BLANK_BLANK;
 	pr_debug("%s:-\n", __func__);
+#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
+	scr_suspended = true;
+#endif
 	return 0;
 }
 
