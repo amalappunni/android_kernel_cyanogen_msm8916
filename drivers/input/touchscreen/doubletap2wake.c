@@ -37,6 +37,9 @@
 
 #define ANDROID_TOUCH_DECLARED
 
+#define KEY_GESTURE_DOUBLE_TAP		193
+
+
 /* Version, author, desc, etc */
 #define DRIVER_AUTHOR "Dennis Rassmann <showp1984@gmail.com>"
 #define DRIVER_DESCRIPTION "Doubletap2wake for almost any device"
@@ -99,10 +102,10 @@ static void doubletap2wake_reset(void) {
 static void doubletap2wake_presspwr(struct work_struct * doubletap2wake_presspwr_work) {
 	if (!mutex_trylock(&pwrkeyworklock))
                 return;
-	input_event(doubletap2wake_pwrdev, EV_KEY, KEY_POWER, 1);
+	input_event(doubletap2wake_pwrdev, EV_KEY, KEY_GESTURE_DOUBLE_TAP, 1);
 	input_event(doubletap2wake_pwrdev, EV_SYN, 0, 0);
 	msleep(DT2W_PWRKEY_DUR);
-	input_event(doubletap2wake_pwrdev, EV_KEY, KEY_POWER, 0);
+	input_event(doubletap2wake_pwrdev, EV_KEY, KEY_GESTURE_DOUBLE_TAP, 0);
 	input_event(doubletap2wake_pwrdev, EV_SYN, 0, 0);
 	msleep(DT2W_PWRKEY_DUR);
         mutex_unlock(&pwrkeyworklock);
@@ -357,7 +360,7 @@ static int __init doubletap2wake_init(void)
 		goto err_alloc_dev;
 	}
 
-	input_set_capability(doubletap2wake_pwrdev, EV_KEY, KEY_POWER);
+	input_set_capability(doubletap2wake_pwrdev, EV_KEY, KEY_GESTURE_DOUBLE_TAP);
 	doubletap2wake_pwrdev->name = "dt2w_pwrkey";
 	doubletap2wake_pwrdev->phys = "dt2w_pwrkey/input0";
 
