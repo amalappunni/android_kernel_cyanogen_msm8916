@@ -111,11 +111,6 @@ config CPU_FREQ_DEFAULT_GOV_ZZMOOVE
 	help
 	  Use the CPUFreq governor 'zzmoove' as default.
 
-config CPU_FREQ_DEFAULT_GOV_PEGASUSQ
-	bool "pegasusq"
-	select CPU_FREQ_GOV_PEGASUSQ
-	help
-Use the CPUFreq governor 'pegasusq' as default
 
 config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	bool "conservative"
@@ -250,9 +245,6 @@ config CPU_FREQ_GOV_ZZMOOVE
 	  (source: https://github.com/ktoonsez/KT747-JB)
 
 	  If in doubt, say N.	
-
-config CPU_FREQ_GOV_PEGASUSQ
-tristate "'pegasusq' cpufreq policy governor"
 
 
 config CPU_FREQ_GOV_CONSERVATIVE
