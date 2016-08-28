@@ -63,6 +63,7 @@ obj-$(CONFIG_QPNP_VM_BMS)	+= qpnp-vm-bms.o batterydata-lib.o batterydata-interfa
 obj-$(CONFIG_QPNP_VM_BMS_HQ)	+= qpnp-vm-bms-hq.o batterydata-lib.o batterydata-interface.o
 obj-$(CONFIG_QPNP_FG)		+= qpnp-fg.o
 obj-$(CONFIG_QPNP_CHARGER)	+= qpnp-charger.o
+obj-$(CONFIG_THUNDERCHARGE_CONTROL) += thundercharge_control.o
 obj-$(CONFIG_QPNP_LINEAR_CHARGER)	+= qpnp-linear-charger.o
 obj-$(CONFIG_QPNP_LINEAR_CHARGER_HQ)	+= qpnp-linear-charger-hq.o
 obj-$(CONFIG_QPNP_SMBCHARGER)	+= qpnp-smbcharger.o

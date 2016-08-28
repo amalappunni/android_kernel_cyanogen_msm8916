@@ -25,6 +25,9 @@
 #include <linux/bitops.h>
 #include <linux/delay.h>
 #include <linux/wakelock.h>
+#ifdef CONFIG_THUNDERCHARGE_CONTROL
+#include "thundercharge_control.h"
+#endif
 #define CREATE_MASK(NUM_BITS, POS) \
 	((unsigned char) (((1 << (NUM_BITS)) - 1) << (POS)))
 #define LBC_MASK(MSB_BIT, LSB_BIT) \
@@ -1308,6 +1311,9 @@ static int get_prop_batt_temp(struct qpnp_lbc_chip *chip)
 static void qpnp_lbc_set_appropriate_current(struct qpnp_lbc_chip *chip)
 {
 	unsigned int chg_current = chip->usb_psy_ma;
+#ifdef CONFIG_THUNDERCHARGE_CONTROL
+	chg_current = custom_current;
+#else
 	if (input_current) {
 		chg_current = chip->prev_max_ma;
 		pr_debug("charging function test charger current %d mA\n", chg_current);
@@ -1321,7 +1327,7 @@ static void qpnp_lbc_set_appropriate_current(struct qpnp_lbc_chip *chip)
 	if (chip->therm_lvl_sel != 0 && chip->thermal_mitigation)
 		chg_current = min(chg_current,
 				chip->thermal_mitigation[chip->therm_lvl_sel]);
-
+#endif
 	pr_debug("setting charger current %d mA\n", chg_current);
 	qpnp_lbc_ibatmax_set(chip, chg_current);
 }
@@ -1342,7 +1348,18 @@ static void qpnp_batt_external_power_changed(struct power_supply *psy)
 	if (qpnp_lbc_is_usb_chg_plugged_in(chip)) {
 		chip->usb_psy->get_property(chip->usb_psy,
 				POWER_SUPPLY_PROP_CURRENT_MAX, &ret);
-		current_ma = ret.intval / 1000;
+
+#ifdef CONFIG_THUNDERCHARGE_CONTROL
+        if(!((ret.intval / 1000) ==0))
+        {
+        pr_info("Using custom current of %d",custom_current);
+		current_ma = custom_current;
+        }
+        else
+        current_ma = 0;
+#else
+        current_ma = ret.intval / 1000;
+#endif
 
 		if (current_ma == chip->prev_max_ma)
 			goto skip_current_config;
