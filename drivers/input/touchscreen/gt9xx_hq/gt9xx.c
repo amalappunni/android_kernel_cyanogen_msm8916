@@ -76,10 +76,6 @@ static char tmp_tp_name[100];
 #include <linux/sensors.h>
 #endif
 
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-#include <linux/input/alternativewake.h>
-#endif
-
 #define GOODIX_DEV_NAME	"Goodix-TS"
 static struct workqueue_struct *goodix_wq;
 struct i2c_client * i2c_connect_client = NULL;
@@ -105,11 +101,6 @@ struct i2c_client * i2c_connect_client = NULL;
 #define RESET_DELAY_T4		20	/* T4: > 5ms */
 
 #define	PHY_BUF_SIZE		32
-
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-bool altwake_chk = false;
-bool scr_suspended = false;
-#endif
 
 static int have_vkey =0;
 static u32 vkey_display_maxy=0;
@@ -450,22 +441,7 @@ void gtp_irq_disable(struct goodix_ts_data *ts)
 	if (!ts->irq_is_disable)
 	{
 		ts->irq_is_disable = 1;
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-#if defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE)
-	altwake_chk = (s2w_switch > 0);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)
-	altwake_chk = (altwake_chk || (dt2w_switch > 0));
-#endif
-	if (altwake_chk) {
-		enable_irq_wake(ts->client->irq);
-	} else {
 		disable_irq_nosync(ts->client->irq);
-	}
-#else
-		disable_irq_nosync(ts->client->irq);
-#endif
-
 	}
 	spin_unlock_irqrestore(&ts->irq_lock, irqflags);
 }
@@ -487,16 +463,7 @@ void gtp_irq_enable(struct goodix_ts_data *ts)
 	spin_lock_irqsave(&ts->irq_lock, irqflags);
 	if (ts->irq_is_disable)
 	{
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-	if (altwake_chk) {
-		disable_irq_wake(ts->client->irq);
-	} else {
 		enable_irq(ts->client->irq);
-	}
-#else
-		enable_irq(ts->client->irq);
-#endif
-
 		ts->irq_is_disable = 0;
 	}
 	spin_unlock_irqrestore(&ts->irq_lock, irqflags);
@@ -2806,13 +2773,6 @@ static int goodix_power_init(struct goodix_ts_data *ts)
 				"Regulator get failed vcc_i2c ret=%d\n", ret);
 	}
 
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-	if (altwake_chk){
-		__clear_bit(EV_KEY, ts->input_dev->evbit); 
-		input_sync(ts->input_dev);
-	}
-#endif
-
 	return 0;
 }
 
@@ -3081,19 +3041,6 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
 	}
 
 	ret = goodix_power_on(ts);
-
-#ifdef CONFIG_TOUCHSCREEN_ALTERNATIVEWAKE
-#ifdef CONFIG_TOUCHSCREEN_SWEEP2WAKE
-	altwake_chk = (s2w_switch > 0);
-#endif
-#ifdef CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE
-	altwake_chk = (altwake_chk || (dt2w_switch > 0));
-#endif
-	if (altwake_chk){
-		input_report_key(ts->input_dev, EV_KEY, 0);
-		input_sync(ts->input_dev);
-	}
-#endif
 	if (ret) {
 		dev_err(&client->dev, "GTP power on failed\n");
 		goto exit_deinit_power;
