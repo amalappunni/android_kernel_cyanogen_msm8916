@@ -1052,7 +1052,6 @@ config TOUCHSCREEN_GT9XX_HQ
 
 source "drivers/input/touchscreen/gt9xx_hq/Kconfig"
 
-<<<<<<< HEAD
 config TOUCHSCREEN_GT9XX_YL
 	bool "Goodix touchpanel (Yulong variant)"
 	depends on I2C
@@ -1063,10 +1062,7 @@ config TOUCHSCREEN_GT9XX_YL
 
 	  If unsure, say N.
 
-source "drivers/input/touchscreen/gt9xx_yl/Kconfig"
 
-=======
->>>>>>> parent of d2b2492... gt9xx_hq: Add dt2w, sweep2wake and touch boost compatibility
 config TOUCHSCREEN_BU21150
 	tristate "JDI AFE BU21150"
 	depends on SPI_MASTER
@@ -1100,9 +1096,6 @@ config TOUCHSCREEN_IT7260_I2C
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called it7258_ts_i2c.
-
-
-endif
 
 
 endif
